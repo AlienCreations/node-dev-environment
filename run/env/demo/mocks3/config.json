@@ -1,0 +1,5 @@
+{
+  "restEndpoints" : {
+    "media-platform.test" : "mocks3"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "devenvironment",
+  "version": "1.0.0",
+  "dependencies": {
+    "change-case": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "ramda": "^0.x.x"
+  },
+  "description": "Alien Creations Developer Microservice Emulator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://seancannon@github.com/aliencreations/node-dev-environment.git"
+  },
+  "scripts": {
+    "pull": "bash installServices.sh && bash installClients.sh",
+    "install-services": "bash installServices.sh",
+    "install-clients": "bash installClients.sh",
+    "start-services": "bash ./startServices.sh",
+    "restart-services": "bash restartServices.sh",
+    "start-clients": "bash startClients.sh",
+    "restart-clients": "bash startClients.sh",
+    "boot-up": "bash docker.sh up",
+    "boot-down": "bash docker.sh down",
+    "audit-routes": "bash auditRoutes.sh",
+    "start": "bash startServices.sh && bash startClients.sh",
+    "stop": "killall node && yarn boot-down",
+    "test": "bash testServices.sh"
+  },
+  "author": "Sean Cannon"
+}

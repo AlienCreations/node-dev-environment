@@ -1,0 +1,7 @@
+CLIENTS=(
+  app
+)
+
+CLIENT_PORTS=(
+  3000
+)
