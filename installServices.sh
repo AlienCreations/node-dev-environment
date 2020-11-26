@@ -43,5 +43,5 @@ for service in ${SERVICE_ARRAY}
 do
   _service=$(export service && echo $(node -e 'console.log(process.env.service.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase())'))
 
-  installFromGit  "${_service}-platform" "${githubUser}"
+  installFromGit  "${PROJECT_PREFIX}${_service}-platform" "${githubUser}"
 done

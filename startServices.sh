@@ -23,14 +23,14 @@ do
   _service=$(export service && echo $(node -e 'console.log(process.env.service.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase())'))
 
   # Kill running applications first
-  export $(grep NODE_PORTS ../${_service}-platform/run/env/demo/.env | xargs)
+  export $(grep NODE_PORTS ../${PROJECT_PREFIX}${_service}-platform/run/env/demo/.env | xargs)
 
   for port in $(echo ${NODE_PORTS} | sed "s/,/ /g")
   do
     lsof -ti tcp:${port} | xargs kill
   done
 
-  pushd ../${_service}-platform
+  pushd ../${PROJECT_PREFIX}${_service}-platform
   bash ./run/env/demo/run.sh | sed 's/^/['"${_service}"'] /' &
   popd
 done
