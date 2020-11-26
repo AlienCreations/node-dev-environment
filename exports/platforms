@@ -1,4 +1,4 @@
-PROJECT_PREFIX=foo-
+PROJECT_PREFIX=qritters-
 
 PLATFORMS=(
   auth
