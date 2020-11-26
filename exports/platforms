@@ -1,3 +1,5 @@
+PROJECT_PREFIX=foo-
+
 PLATFORMS=(
   auth
 )

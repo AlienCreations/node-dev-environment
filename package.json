@@ -2,7 +2,6 @@
   "name": "devenvironment",
   "version": "1.0.0",
   "dependencies": {
-    "change-case": "^4.1.1",
     "dotenv": "^8.2.0",
     "ramda": "^0.x.x"
   },

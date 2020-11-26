@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.2'
 
 services :
 
@@ -70,3 +70,31 @@ services :
     depends_on:
       database:
         condition: service_healthy
+
+  #############################################################################
+  # ElasticSearch
+  search :
+    image           : docker.elastic.co/elasticsearch/elasticsearch:7.0.1
+    mem_limit       : 2g
+    container_name  : elasticsearch
+    environment     :
+      - "discovery.type=single-node"
+    volumes         :
+      - "./tmp/env/${NODE_ENV}/esdata:/usr/share/elasticsearch/data:cached"
+    ports           :
+      - "${SEARCH_PORT}:9200"
+
+  #############################################################################
+  # Vault
+  secret :
+    image          : vault:0.8.3
+    container_name : vault
+    mem_limit      : 256m
+    environment    :
+      - "VAULT_DEV_ROOT_TOKEN_ID=${VAULT_DEV_ROOT_TOKEN_ID}"
+      - "VAULT_LOCAL_CONFIG=${VAULT_LOCAL_CONFIG}"
+    volumes        :
+      - "./tmp/env/${NODE_ENV}/vault/file:/vault/file:cached"
+      - "./tmp/env/${NODE_ENV}/vault/logs:/vault/logs:cached"
+    ports          :
+      - "${VAULT_PORT}:8200"
