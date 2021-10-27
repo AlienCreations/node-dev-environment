@@ -11,19 +11,19 @@
     "url": "git+https://seancannon@github.com/aliencreations/node-dev-environment.git"
   },
   "scripts": {
-    "pull": "bash installServices.sh && bash installClients.sh",
-    "install-services": "bash installServices.sh",
+    "pull": "bash installPlatforms.sh && bash installClients.sh",
+    "install-platforms": "bash installPlatforms.sh",
     "install-clients": "bash installClients.sh",
-    "start-services": "bash ./startServices.sh",
-    "restart-services": "bash restartServices.sh",
+    "start-platforms": "bash startPlatforms.sh",
+    "restart-platforms": "bash restartPlatforms.sh",
     "start-clients": "bash startClients.sh",
     "restart-clients": "bash startClients.sh",
     "boot-up": "bash docker.sh up",
     "boot-down": "bash docker.sh down",
     "audit-routes": "bash auditRoutes.sh",
-    "start": "bash startServices.sh && bash startClients.sh",
+    "start": "bash startPlatforms.sh && bash startClients.sh",
     "stop": "killall node && yarn boot-down",
-    "test": "bash testServices.sh"
+    "test": "bash testPlatforms.sh"
   },
   "author": "Sean Cannon"
 }

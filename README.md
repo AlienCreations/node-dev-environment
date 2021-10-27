@@ -30,14 +30,14 @@ Log into NPM if you haven't done so already and update your `.npmrc` file to inc
 ## Step 2
 ##### Install all the project apps
 
-Specify your user for http auth, install clients and platforms separately
+Specify your user for http auth, your github organization which contains the forks, and install clients and platforms separately
 
 ```
-$ yarn install-clients -u <github username>
+$ yarn install-clients -u <github username> -o <github organization>
 ```
 
 ```
-$ yarn install-platforms -u <github username>
+$ yarn install-platforms -u <github username> -o <github organization>
 ```
 
 Run this command to 
@@ -51,7 +51,7 @@ As we create new clients and clients, we will need to add them to these lists.
 
 We also pre-define ports from 3000 onward for the clients in _this_ repo. 
 
-Services specify their own ports in their own repos. 
+Platforms specify their own ports in their own repos. 
 
 If you are fine with the default ports, this should all work fine.
 
@@ -59,18 +59,18 @@ To manually specify a particular platform/client or group of platforms/clients t
 _NOTE_: This is a change from previous versions which required `-s` before each platform name. This
 version can accept `-s` but does not require it.
 
-Service aliases are `[alias]-platform` to match github repository naming conventions:
+Platform aliases are `[alias]-platform` to match github repository naming conventions:
 Here are some examples; any stored procedures you have which may include the `-s` are still supported
 ```
-$  yarn install-platforms -u <github username> auth i18n # The preferred method
-$  yarn install-platforms -u <github username> -s auth i18n
-$  yarn install-platforms -u <github username> -s auth -s i18n
+$  yarn install-platforms -u <github username> -o <github organization> auth i18n # The preferred method
+$  yarn install-platforms -u <github username> -o <github organization> -s auth i18n
+$  yarn install-platforms -u <github username> -o <github organization> -s auth -s i18n
 ```
 
 Client aliases are `[alias]-web` to match github repository naming conventions; similar changes as
 listed above for install-platforms: `-s` not required but supported.
 ```
-$ yarn install-clients -u <github username> app1 app2
+$ yarn install-clients -u <github username> -o <github organization> app1 app2
 ```
 
 ## Step 3
