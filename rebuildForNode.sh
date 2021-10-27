@@ -27,7 +27,7 @@ while getopts "u:" opt; do
   esac
 done
 
-SERVICE_ARRAY=${PLATFORMS[@]}
+PLATFORM_ARRAY=${PLATFORMS[@]}
 CLIENT_ARRAY=${CLIENTS[@]}
 
 NODE_VERSION=$(node -v)
@@ -53,15 +53,15 @@ createPullRequest() {
   gh pr create --title "${COMMIT_MESSAGE}" --body ""
 }
 
-for service in ${SERVICE_ARRAY}
+for platform in ${PLATFORM_ARRAY}
 do
-  _service=$(export service && echo $(node -e 'console.log(process.env.service.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase())'))
+  _platform=$(export platform && echo $(node -e 'console.log(process.env.platform.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase())'))
 
-  pushd ../${_service}-platform || exit
+  pushd ../${_platform}-platform || exit
 
   prepForRebuild
 
-  export _service NODE_VERSION NPM_VERSION && node << EOF
+  export _platform NODE_VERSION NPM_VERSION && node << EOF
     const fs   = require('fs'),
           path = require('path');
 
@@ -74,7 +74,7 @@ do
         const dockerFile = fs.readFileSync(dockerFilePath, 'utf8');
 
         if (dockerFile) {
-          console.log('Updating Dockerfile for Node ' + nodeVersion + ' on ' + process.env._service + '-platform')
+          console.log('Updating Dockerfile for Node ' + nodeVersion + ' on ' + process.env._platform + '-platform')
           fs.writeFileSync(dockerFilePath, dockerFile.replace(/node:([0-9]+.[0-9]+.[0-9]+)-stretch-slim/g, 'node:' + nodeVersion + '-stretch-slim'))
         }
       } catch (e) {}
@@ -86,7 +86,7 @@ do
         const packageJson     = fs.readFileSync(packageJsonPath, 'utf8');
 
         if (packageJson) {
-          console.log('Updating package.json for Node ' + nodeVersion + ' and NPM version ' + npmVersion + ' on ' + process.env._service + '-platform')
+          console.log('Updating package.json for Node ' + nodeVersion + ' and NPM version ' + npmVersion + ' on ' + process.env._platform + '-platform')
           const package = JSON.parse(packageJson);
           package.engines = {
             node : '^' + nodeVersion,

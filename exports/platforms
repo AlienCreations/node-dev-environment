@@ -1,5 +1,8 @@
-PROJECT_PREFIX=foo-
+PROJECT_PREFIX=
 
 PLATFORMS=(
   auth
+  i18n
+  commerce
+  catalog
 )

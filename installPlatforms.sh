@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -a
-. exports/clients
+. exports/platforms
 set +a
 
 source './installFromGit.sh'
@@ -9,7 +9,7 @@ source './installFromGit.sh'
 let githubUser
 let githubOrganization
 
-onlyClients=()
+onlyPlatforms=()
 
 while getopts "u:s:o:" opt; do
   case ${opt} in
@@ -22,19 +22,12 @@ while getopts "u:s:o:" opt; do
       githubOrganization=$OPTARG;
       ;;
     s)
-      echo "Using client $OPTARG" >&2
-      onlyClients+=($OPTARG);
+      echo "Using platform $OPTARG" >&2
+      onlyPlatforms+=($OPTARG);
       ;;
   esac
 done
 shift $((OPTIND -1))
-
-for opt in "$@"; do
-  if [[ "$opt" != "-s" ]]; then
-    echo "Using client $opt" >&2
-    onlyClients+=($opt)
-  fi
-done
 
 if [[ -z "$githubUser" ]]; then
   echo "" 1>&2
@@ -50,15 +43,24 @@ if [[ -z "$githubOrganization" ]]; then
   exit 1
 fi
 
-onlyClientsCount=${#onlyClients}
+for opt in "$@"; do
+  if [[ "$opt" != "-s" ]]; then
+    echo "Using platform $opt" >&2
+    onlyPlatforms+=($opt)
+  fi
+done
 
-if [ ${onlyClientsCount} -eq 0 ]; then
-  CLIENT_ARRAY=${CLIENTS[@]}
+onlyPlatformsCount=${#onlyPlatforms}
+
+if [ ${onlyPlatformsCount} -eq 0 ]; then
+  PLATFORM_ARRAY=${PLATFORMS[@]}
 else
-  CLIENT_ARRAY=${onlyClients[@]}
+  PLATFORM_ARRAY=${onlyPlatforms[@]}
 fi
 
-for client in ${CLIENT_ARRAY}
+for platform in ${PLATFORM_ARRAY}
 do
-  installFromGit "${client}-web" "${githubUser}" "${githubOrganization}"
+  _platform=$(export platform && echo $(node -e 'console.log(process.env.platform.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase())'))
+
+  installFromGit  "${PROJECT_PREFIX}${_platform}-platform" "${githubUser}" "${githubOrganization}"
 done
