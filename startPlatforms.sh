@@ -16,7 +16,7 @@ fi
 export WHITELIST=$(bash ./utils/generateWhitelistEnv.sh)
 export PRIVATE_KEY=$(bash ./utils/generatePrivateKeyEnv.sh)
 export PUBLIC_KEYS=$(bash ./utils/generatePublicKeysEnv.sh)
-export PLATFORMS=$(bash ./utils/generateServicesEnv.sh)
+export PLATFORMS=$(bash ./utils/generatePlatformsEnv.sh)
 
 for platform in ${PLATFORM_ARRAY[@]}
 do
@@ -31,6 +31,7 @@ do
   done
 
   pushd ../${PROJECT_PREFIX}${_platform}-platform
+  touch ./.env
   bash ./run/env/demo/run.sh | sed 's/^/['"${_platform}"'] /' &
   popd
 done
