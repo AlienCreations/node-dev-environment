@@ -1,6 +1,6 @@
 PROJECT_PREFIX=
 
-PLATFORMS=(
+PLATFORM_SERVICES=(
   auth
   i18n
   commerce
