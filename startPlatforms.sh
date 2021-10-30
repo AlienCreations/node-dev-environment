@@ -17,7 +17,6 @@ export WHITELIST=$(bash ./utils/generateWhitelistEnv.sh)
 export PRIVATE_KEY=$(bash ./utils/generatePrivateKeyEnv.sh)
 export PUBLIC_KEYS=$(bash ./utils/generatePublicKeysEnv.sh)
 export PLATFORMS=$(bash ./utils/generatePlatformsEnv.sh)
-export FOO=$(bash ./utils/generatePlatformsEnv.sh)
 
 for platform in ${PLATFORM_ARRAY[@]}
 do
