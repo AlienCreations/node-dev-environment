@@ -27,7 +27,7 @@ while getopts "u:" opt; do
   esac
 done
 
-PLATFORM_ARRAY=${PLATFORMS[@]}
+PLATFORM_ARRAY=${PLATFORM_SERVICES[@]}
 CLIENT_ARRAY=${CLIENTS[@]}
 
 NODE_VERSION=$(node -v)

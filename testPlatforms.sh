@@ -7,7 +7,7 @@ set +a
 
 if [ "$#" -eq  "0" ]
   then
-    PLATFORM_ARRAY=${PLATFORMS[@]}
+    PLATFORM_ARRAY=${PLATFORM_SERVICES[@]}
   else
     PLATFORM_ARRAY="$@"
 fi

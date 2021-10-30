@@ -4,7 +4,7 @@ set -a
 . exports/platforms
 set +a
 
-PLATFORM_ARRAY=${PLATFORMS[@]}
+PLATFORM_ARRAY=${PLATFORM_SERVICES[@]}
 
 export PLATFORM_ARRAY && s=$(node << EOF
   const R = require('ramda');

@@ -10,16 +10,16 @@ set +a
 
 if [ "$#" -eq  "0" ]
   then
-    SERVICE_ARRAY=(${PLATFORMS[@]})
+    PLATFORM_ARRAY=(${PLATFORM_SERVICES[@]})
   else
-    SERVICE_ARRAY=("$@")
+    PLATFORM_ARRAY=("$@")
 fi
 
 # Ensure exposed exports here are JSON friendly for node
 export WHITELIST=$(bash ./utils/generateWhitelistEnv.sh)
 export PRIVATE_KEY=$(bash ./utils/generatePrivateKeyEnv.sh)
 export PUBLIC_KEYS=$(bash ./utils/generatePublicKeysEnv.sh)
-export SERVICES=$(bash ./utils/generateServicesEnv.sh)
+export PLATFORMS=$(bash ./utils/generateServicesEnv.sh)
 
 node << EOF
   const process       = require('process'),
@@ -63,7 +63,7 @@ node << EOF
   let   resourceId = 1;
   let   resources  = ['1,NULL,NULL,All Resources and Methods,all-resources,*,*,2'];
 
-  ${SERVICES}.map(_service => {
+  ${PLATFORMS}.map(_service => {
     const service = _service.replace(/[\w]([A-Z])/g, m => m[0] + "-" + m[1]).toLowerCase();
 
     console.log('Auditing ' + service + ' platform...');

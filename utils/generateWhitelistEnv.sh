@@ -4,9 +4,9 @@ set -a
 . exports/platforms
 set +a
 
-SERVICE_ARRAY=${PLATFORMS[@]}
+PLATFORM_ARRAY=${PLATFORM_SERVICES[@]}
 
-export SERVICE_ARRAY && w=$(node << EOF
+export PLATFORM_ARRAY && w=$(node << EOF
   const R = require('ramda');
 
   const makeKey = k => k + 'Platform';
@@ -19,7 +19,7 @@ export SERVICE_ARRAY && w=$(node << EOF
     R.append('lambda'),
     R.map(makeKey),
     R.split(' ')
-  )(process.env.SERVICE_ARRAY);
+  )(process.env.PLATFORM_ARRAY);
 EOF
 )
 

@@ -53,7 +53,7 @@ done
 onlyPlatformsCount=${#onlyPlatforms}
 
 if [ ${onlyPlatformsCount} -eq 0 ]; then
-  PLATFORM_ARRAY=${PLATFORMS[@]}
+  PLATFORM_ARRAY=${PLATFORM_SERVICES[@]}
 else
   PLATFORM_ARRAY=${onlyPlatforms[@]}
 fi
